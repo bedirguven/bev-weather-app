@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="weather-search">
+        <div class="row">
+            <div class="col-xs-12">
+                <div>
+                    <form class="form-inline" role="form">
+                        <span class="btn-group" >
+                            <button ng-repeat="item in weatherLocations" ng-click="setLocation(item)" type="submit" class="btn btn-default">{{item}}</button>
+                        </span>
+                        <span class="form-group {{hasState}}">
+                            <div class="padded-row">
+                              <div angucomplete-alt="" id="ex1" placeholder="Şehir ara" maxlength="50" pause="100" selected-object="location" local-data="countries" search-fields="name" title-field="name" minlength="1" input-class="form-control form-control-small" match-class="highlight" class="ng-isolate-scope">
+                                <div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}"> 
+                                 <input id="ex1_value" name="" ng-class="{'angucomplete-input-not-empty': notEmpty}" ng-model="location" ng-disabled="disableInput" type="text" placeholder="Şehir ara" maxlength="50" ng-focus="onFocusHandler()" class="form-control form-control-small ng-valid-maxlength ng-dirty ng-valid-parse ng-touched angucomplete-input-not-empty" ng-blur="hideResults($event)" autocapitalize="on" autocorrect="on" autocomplete="on" ng-change="addLocation(location)"> 
+                                  <div id="ex1_dropdown" class="angucomplete-dropdown ng-hide" ng-show="showDropdown"> 
+                                     <div class="angucomplete-searching ng-binding ng-hide" ng-show="searching" ng-bind="textSearching">Searching...</div>  
+                                       <div class="angucomplete-searching ng-binding" ng-show="!searching &amp;&amp; (!results || results.length == 0)" ng-bind="textNoResults">No results found</div>    <!-- ngRepeat: result in results -->  
+                                    </div>
+                                   </div>
+                               </div>
+                            </div>
+                        </span>
+                        <button ng-click="addLocation(location)" type="submit" class="btn btn-warning" style="background-color:red">Şehir Ekle!</button>
+                        <div>Bilgileri görmek istediğiniz gün aralığını seçiniz:</div>
+                        <span class="btn-group" >
+
+                            <button ng-repeat="abc in dayNumber" ng-click="setDayNumber(abc)" type="submit" class="btn btn-default">{{abc}}</button>
+                        </span>
+                        <div style="color:red">{{message}}</div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="weather-data" ng-show="true">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="">
+                    <h3>
+                        {{forecast.city.name | placeholder:'Sehir yok'}}  - {{forecast.city.country | isoCountry}}
+                        <small>Boylam: {{forecast.city.coord.lon | number:2}} Enlem: {{forecast.city.coord.lat | number:2}} </small>
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4" ng-hide="day1Hide">
+                <div weather-panel="forecast" show-entry="forecast.list[0]"></div>
+            </div>
+            <div class="col-xs-4" ng-hide="day2Hide">
+                <div weather-panel="forecast" show-entry="forecast.list[1]"></div>
+            </div>
+            <div class="col-xs-4" ng-hide="day3Hide">
+                <div weather-panel="forecast" show-entry="forecast.list[2]"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
